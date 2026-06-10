@@ -1,0 +1,125 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --text-color: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-gradient);
+  background-attachment: fixed;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.box {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: var(--text-color);
+  transition: transform 0.3s ease;
+}
+
+.heading h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+input[type="text"]:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+}
+
+.btn {
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #764ba2;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #764ba2;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+
+.result {
+  margin-top: 20px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.result h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.result p:first-of-type {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.result p:last-of-type {
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
