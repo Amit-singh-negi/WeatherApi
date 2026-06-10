@@ -35,7 +35,11 @@ function getTime(timezoneOffset) {
 function getDay(timezoneOffset) {
   const utc = Date.now() + new Date().getTimezoneOffset() * 60000;
   const local = new Date(utc + timezoneOffset * 1000);
-  return local.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric" });
+  return local.toLocaleDateString([], {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 export default function WeatherApp() {
@@ -55,7 +59,7 @@ export default function WeatherApp() {
 
     try {
       const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(q)}&units=metric&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(q)}&units=metric&appid=${API_KEY}`,
       );
       const data = await res.json();
 
@@ -79,29 +83,31 @@ export default function WeatherApp() {
   const icon = weatherIcons[condition] || weatherIcons.default;
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "#0f172a",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontFamily: "'Segoe UI', system-ui, sans-serif",
-      padding: "2rem 1rem",
-    }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#0f172a",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Segoe UI', system-ui, sans-serif",
+        padding: "2rem 1rem",
+      }}
+    >
       <div style={{ width: "100%", maxWidth: 420 }}>
-
-        {/* Search */}
         <form onSubmit={search} style={{ marginBottom: "1.5rem" }}>
-          <div style={{
-            display: "flex",
-            background: "rgba(255,255,255,0.07)",
-            borderRadius: 14,
-            border: "1px solid rgba(255,255,255,0.12)",
-            overflow: "hidden",
-          }}>
+          <div
+            style={{
+              display: "flex",
+              background: "rgba(255,255,255,0.07)",
+              borderRadius: 14,
+              border: "1px solid rgba(255,255,255,0.12)",
+              overflow: "hidden",
+            }}
+          >
             <input
               value={city}
-              onChange={e => setCity(e.target.value)}
+              onChange={(e) => setCity(e.target.value)}
               placeholder="Search city…"
               style={{
                 flex: 1,
@@ -131,52 +137,78 @@ export default function WeatherApp() {
             </button>
           </div>
           {error && (
-            <p style={{
-              color: "#f87171",
-              fontSize: 13,
-              margin: "8px 4px 0",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-            }}>
+            <p
+              style={{
+                color: "#f87171",
+                fontSize: 13,
+                margin: "8px 4px 0",
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
               ⚠ {error}
             </p>
           )}
         </form>
 
-        {/* Weather Card */}
         {weather && (
-          <div style={{
-            borderRadius: 24,
-            background: bg,
-            padding: "2rem",
-            color: "#fff",
-            position: "relative",
-            overflow: "hidden",
-            boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
-          }}>
-            {/* Decorative blobs */}
-            <div style={{
-              position: "absolute", top: -40, right: -40,
-              width: 180, height: 180,
-              borderRadius: "50%",
-              background: "rgba(255,255,255,0.06)",
-              pointerEvents: "none",
-            }} />
-            <div style={{
-              position: "absolute", bottom: -60, left: -30,
-              width: 220, height: 220,
-              borderRadius: "50%",
-              background: "rgba(0,0,0,0.08)",
-              pointerEvents: "none",
-            }} />
+          <div
+            style={{
+              borderRadius: 24,
+              background: bg,
+              padding: "2rem",
+              color: "#fff",
+              position: "relative",
+              overflow: "hidden",
+              boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: -40,
+                right: -40,
+                width: 180,
+                height: 180,
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.06)",
+                pointerEvents: "none",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: -60,
+                left: -30,
+                width: 220,
+                height: 220,
+                borderRadius: "50%",
+                background: "rgba(0,0,0,0.08)",
+                pointerEvents: "none",
+              }}
+            />
 
-            {/* Header */}
             <div style={{ position: "relative" }}>
-              <p style={{ margin: 0, fontSize: 13, opacity: 0.75, letterSpacing: 1, textTransform: "uppercase" }}>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 13,
+                  opacity: 0.75,
+                  letterSpacing: 1,
+                  textTransform: "uppercase",
+                }}
+              >
                 {weather.sys.country}
               </p>
-              <h1 style={{ margin: "2px 0 4px", fontSize: 32, fontWeight: 600, letterSpacing: -0.5 }}>
+              <h1
+                style={{
+                  margin: "2px 0 4px",
+                  fontSize: 32,
+                  fontWeight: 600,
+                  letterSpacing: -0.5,
+                }}
+              >
                 {weather.name}
               </h1>
               <p style={{ margin: 0, fontSize: 13, opacity: 0.7 }}>
@@ -184,19 +216,34 @@ export default function WeatherApp() {
               </p>
             </div>
 
-            {/* Main temp */}
-            <div style={{
-              display: "flex",
-              alignItems: "flex-start",
-              justifyContent: "space-between",
-              margin: "2rem 0 1.5rem",
-              position: "relative",
-            }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                margin: "2rem 0 1.5rem",
+                position: "relative",
+              }}
+            >
               <div>
-                <div style={{ fontSize: 80, fontWeight: 200, lineHeight: 1, letterSpacing: -4 }}>
+                <div
+                  style={{
+                    fontSize: 80,
+                    fontWeight: 200,
+                    lineHeight: 1,
+                    letterSpacing: -4,
+                  }}
+                >
                   {Math.round(weather.main.temp)}°
                 </div>
-                <p style={{ margin: "6px 0 0", fontSize: 15, opacity: 0.85, textTransform: "capitalize" }}>
+                <p
+                  style={{
+                    margin: "6px 0 0",
+                    fontSize: 15,
+                    opacity: 0.85,
+                    textTransform: "capitalize",
+                  }}
+                >
                   {weather.weather[0].description}
                 </p>
                 <p style={{ margin: "2px 0 0", fontSize: 13, opacity: 0.6 }}>
@@ -206,41 +253,66 @@ export default function WeatherApp() {
               <span style={{ fontSize: 64, marginTop: 4 }}>{icon}</span>
             </div>
 
-            {/* Stats grid */}
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 10,
-              position: "relative",
-            }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 10,
+                position: "relative",
+              }}
+            >
               {[
-                { label: "Humidity", value: `${weather.main.humidity}%`, icon: "💧" },
-                { label: "Wind", value: `${Math.round(weather.wind.speed)} m/s`, icon: "💨" },
-                { label: "Pressure", value: `${weather.main.pressure} hPa`, icon: "🌐" },
-                { label: "Visibility", value: `${(weather.visibility / 1000).toFixed(1)} km`, icon: "👁" },
-              ].map(stat => (
-                <div key={stat.label} style={{
-                  background: "rgba(0,0,0,0.18)",
-                  borderRadius: 12,
-                  padding: "12px 14px",
-                  backdropFilter: "blur(4px)",
-                }}>
-                  <p style={{ margin: "0 0 4px", fontSize: 12, opacity: 0.65 }}>{stat.icon} {stat.label}</p>
-                  <p style={{ margin: 0, fontSize: 16, fontWeight: 500 }}>{stat.value}</p>
+                {
+                  label: "Humidity",
+                  value: `${weather.main.humidity}%`,
+                  icon: "💧",
+                },
+                {
+                  label: "Wind",
+                  value: `${Math.round(weather.wind.speed)} m/s`,
+                  icon: "💨",
+                },
+                {
+                  label: "Pressure",
+                  value: `${weather.main.pressure} hPa`,
+                  icon: "🌐",
+                },
+                {
+                  label: "Visibility",
+                  value: `${(weather.visibility / 1000).toFixed(1)} km`,
+                  icon: "👁",
+                },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  style={{
+                    background: "rgba(0,0,0,0.18)",
+                    borderRadius: 12,
+                    padding: "12px 14px",
+                    backdropFilter: "blur(4px)",
+                  }}
+                >
+                  <p style={{ margin: "0 0 4px", fontSize: 12, opacity: 0.65 }}>
+                    {stat.icon} {stat.label}
+                  </p>
+                  <p style={{ margin: 0, fontSize: 16, fontWeight: 500 }}>
+                    {stat.value}
+                  </p>
                 </div>
               ))}
             </div>
 
-            {/* Min/Max */}
-            <div style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: 12,
-              padding: "12px 14px",
-              background: "rgba(0,0,0,0.18)",
-              borderRadius: 12,
-              position: "relative",
-            }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginTop: 12,
+                padding: "12px 14px",
+                background: "rgba(0,0,0,0.18)",
+                borderRadius: 12,
+                position: "relative",
+              }}
+            >
               <span style={{ fontSize: 13, opacity: 0.7 }}>
                 ↓ {Math.round(weather.main.temp_min)}°C
               </span>
@@ -252,11 +324,18 @@ export default function WeatherApp() {
           </div>
         )}
 
-        {/* Empty state */}
         {!weather && !loading && !error && (
-          <div style={{ textAlign: "center", color: "rgba(255,255,255,0.3)", padding: "2rem 0" }}>
+          <div
+            style={{
+              textAlign: "center",
+              color: "rgba(255,255,255,0.3)",
+              padding: "2rem 0",
+            }}
+          >
             <div style={{ fontSize: 48, marginBottom: 12 }}>🌍</div>
-            <p style={{ fontSize: 14, margin: 0 }}>Enter a city name to see the weather</p>
+            <p style={{ fontSize: 14, margin: 0 }}>
+              Enter a city name to see the weather
+            </p>
           </div>
         )}
       </div>
